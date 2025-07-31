@@ -1029,7 +1029,7 @@ class WebResearchTool(BaseTool):
                 # Clean up text
                 lines = (line.strip() for line in text.splitlines())
                 chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-                text = '\\n'.join(chunk for chunk in chunks if chunk)
+                text = '\n'.join(chunk for chunk in chunks if chunk)
                 
                 # Limit text length
                 if len(text) > 2000:
