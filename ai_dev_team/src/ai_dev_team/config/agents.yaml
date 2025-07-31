@@ -11,7 +11,7 @@ senior_developer:
     languages and frameworks. You excel at writing clean, maintainable code and have deep 
     knowledge of software architecture patterns, design principles, and modern development practices.
     You mentor junior developers and lead technical discussions.
-  max_iter: 3
+  max_iter: 10  # Increased to accommodate the complexity of senior developer tasks. Adjust as needed for other roles.
   max_execution_time: 300
 
 # Frontend Developer
