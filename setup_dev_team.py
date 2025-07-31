@@ -867,9 +867,9 @@ class CodeAnalysisTool(BaseTool):
                     else:
                         imports.append(node.module or "")
             
-            result = f"Python Structure Analysis for {file_path.name}:\\n"
-            result += f"Classes ({len(classes)}): {', '.join(classes)}\\n"
-            result += f"Functions ({len(functions)}): {', '.join(functions)}\\n"
+            result = f"Python Structure Analysis for {file_path.name}:\n"
+            result += f"Classes ({len(classes)}): {', '.join(classes)}\n"
+            result += f"Functions ({len(functions)}): {', '.join(functions)}\n"
             result += f"Imports ({len(imports)}): {', '.join(imports)}"
             
             return result
