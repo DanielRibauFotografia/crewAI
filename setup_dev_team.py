@@ -784,7 +784,7 @@ class GitTool(BaseTool):
                     return f"Unknown Git operation: {operation}"
             
             if result.returncode == 0:
-                return f"Git {operation} successful:\\n{result.stdout}"
+                return f"Git {operation} successful:\n{result.stdout}"
             else:
                 return f"Git {operation} failed:\\n{result.stderr}"
                 
