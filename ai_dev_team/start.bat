@@ -75,6 +75,11 @@ if "%choice%"=="1" (
 )
 
 REM Deactivate virtual environment
-call deactivate
+if defined VENV_ACTIVATED (
+    call deactivate
+    echo ✅ Virtual environment deactivated
+) else (
+    echo ⚠️  Virtual environment was not activated, skipping deactivation
+)
 
 pause
