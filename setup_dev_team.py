@@ -656,7 +656,7 @@ class FileSystemTool(BaseTool):
                 for item in path_obj.iterdir():
                     item_type = "DIR" if item.is_dir() else "FILE"
                     items.append(f"{item_type}: {item.name}")
-                return "\\n".join(items)
+                return "\n".join(items)
             
             elif operation == "copy_file":
                 if destination is None:
