@@ -1,0 +1,219 @@
+# Development Team Tasks Configuration
+
+# Project Analysis Task
+analyze_project:
+  description: >
+    Analyze the project requirements: {project_description}
+    
+    Consider the following aspects:
+    - Technical requirements and constraints
+    - Architecture and design patterns
+    - Technology stack recommendations
+    - Timeline and resource estimation
+    - Risk assessment and mitigation strategies
+    
+    Provide a comprehensive analysis with actionable recommendations.
+  expected_output: >
+    A detailed project analysis document including:
+    - Executive summary
+    - Technical requirements breakdown
+    - Recommended architecture and technology stack
+    - Development timeline and milestones
+    - Risk assessment and mitigation plan
+    - Resource allocation recommendations
+  agent: business_analyst
+
+# Architecture Design Task
+design_architecture:
+  description: >
+    Based on the project analysis, design a comprehensive software architecture for: {project_description}
+    
+    Include:
+    - System architecture diagram
+    - Component breakdown and responsibilities
+    - Data flow and integration points
+    - Security considerations
+    - Scalability and performance requirements
+    - Technology stack justification
+  expected_output: >
+    A complete architecture design document with:
+    - High-level system architecture
+    - Detailed component specifications
+    - Database schema design
+    - API specifications
+    - Security architecture
+    - Deployment architecture
+  agent: tech_lead
+
+# Backend Development Task
+develop_backend:
+  description: >
+    Implement the backend components for: {project_description}
+    
+    Based on the architecture design, create:
+    - RESTful API endpoints
+    - Database models and migrations
+    - Business logic implementation
+    - Authentication and authorization
+    - Error handling and logging
+    - Unit tests for backend components
+  expected_output: >
+    Complete backend implementation including:
+    - Source code with proper structure
+    - API documentation
+    - Database setup scripts
+    - Configuration files
+    - Unit tests with good coverage
+    - Deployment instructions
+  agent: backend_developer
+
+# Frontend Development Task
+develop_frontend:
+  description: >
+    Create the frontend application for: {project_description}
+    
+    Implement:
+    - User interface components
+    - State management
+    - API integration
+    - Responsive design
+    - User experience optimizations
+    - Frontend testing
+  expected_output: >
+    Complete frontend application with:
+    - Source code with component structure
+    - Responsive UI implementation
+    - API integration layer
+    - State management setup
+    - Frontend tests
+    - Build and deployment configuration
+  agent: frontend_developer
+
+# Database Design Task
+design_database:
+  description: >
+    Design and implement the database schema for: {project_description}
+    
+    Create:
+    - Entity-relationship diagrams
+    - Database schema with proper normalization
+    - Indexes for performance optimization
+    - Data migration scripts
+    - Backup and recovery procedures
+  expected_output: >
+    Complete database design including:
+    - ER diagrams and schema documentation
+    - SQL scripts for table creation
+    - Index optimization recommendations
+    - Data migration procedures
+    - Backup and recovery plan
+  agent: database_admin
+
+# Security Assessment Task
+assess_security:
+  description: >
+    Perform a comprehensive security assessment for: {project_description}
+    
+    Evaluate:
+    - Authentication and authorization mechanisms
+    - Data encryption and protection
+    - Input validation and sanitization
+    - API security measures
+    - Infrastructure security
+    - Compliance requirements
+  expected_output: >
+    Security assessment report with:
+    - Identified vulnerabilities and risks
+    - Security recommendations and best practices
+    - Implementation guidelines
+    - Compliance checklist
+    - Security testing procedures
+  agent: security_specialist
+
+# Testing Strategy Task
+create_testing_strategy:
+  description: >
+    Develop a comprehensive testing strategy for: {project_description}
+    
+    Include:
+    - Test planning and strategy
+    - Unit testing framework setup
+    - Integration testing procedures
+    - End-to-end testing scenarios
+    - Performance testing guidelines
+    - Test automation implementation
+  expected_output: >
+    Complete testing strategy document with:
+    - Test plan and coverage requirements
+    - Testing framework recommendations
+    - Automated test suites
+    - Performance testing procedures
+    - Quality assurance checklist
+    - Bug tracking and reporting process
+  agent: qa_engineer
+
+# DevOps Setup Task
+setup_devops:
+  description: >
+    Set up DevOps infrastructure and CI/CD pipeline for: {project_description}
+    
+    Implement:
+    - Version control workflow
+    - Continuous integration pipeline
+    - Automated deployment process
+    - Infrastructure as code
+    - Monitoring and logging
+    - Container orchestration
+  expected_output: >
+    Complete DevOps setup including:
+    - CI/CD pipeline configuration
+    - Infrastructure automation scripts
+    - Deployment procedures
+    - Monitoring and alerting setup
+    - Documentation for operations
+    - Disaster recovery procedures
+  agent: devops_engineer
+
+# UI/UX Design Task
+design_user_experience:
+  description: >
+    Create user experience design for: {project_description}
+    
+    Develop:
+    - User personas and journey maps
+    - Wireframes and mockups
+    - Interactive prototypes
+    - Design system and style guide
+    - Accessibility considerations
+    - Usability testing plan
+  expected_output: >
+    Complete UX design package with:
+    - User research and personas
+    - Wireframes and high-fidelity mockups
+    - Interactive prototype
+    - Design system documentation
+    - Accessibility guidelines
+    - Usability testing procedures
+  agent: ui_ux_designer
+
+# Code Review Task
+review_code:
+  description: >
+    Perform comprehensive code review for the project: {project_description}
+    
+    Review:
+    - Code quality and best practices
+    - Architecture adherence
+    - Security considerations
+    - Performance optimizations
+    - Documentation completeness
+    - Test coverage
+  expected_output: >
+    Code review report including:
+    - Code quality assessment
+    - Identified issues and recommendations
+    - Best practices compliance
+    - Security review findings
+    - Performance optimization suggestions
+    - Documentation review
+  agent: senior_developer
