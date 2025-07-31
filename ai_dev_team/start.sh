@@ -11,6 +11,16 @@ if [ ! -f "src/ai_dev_team/main.py" ]; then
     exit 1
 fi
 
+# Activate virtual environment
+if [ -d "venv" ]; then
+    echo "🐍 Activating virtual environment..."
+    source venv/bin/activate
+    echo "✅ Virtual environment activated"
+else
+    echo "⚠️  Virtual environment not found. Please run setup_dev_team.py first."
+    exit 1
+fi
+
 # Check if Ollama is running
 if ! pgrep -x "ollama" > /dev/null; then
     echo "🚀 Starting Ollama..."
@@ -68,3 +78,6 @@ case $choice in
         echo "👋 Goodbye!"
         ;;
 esac
+
+# Deactivate virtual environment
+deactivate

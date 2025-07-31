@@ -9,6 +9,17 @@ if not exist "src\ai_dev_team\main.py" (
     exit /b 1
 )
 
+REM Activate virtual environment
+if exist "venv\Scripts\activate.bat" (
+    echo 🐍 Activating virtual environment...
+    call venv\Scripts\activate.bat
+    echo ✅ Virtual environment activated
+) else (
+    echo ⚠️  Virtual environment not found. Please run setup_dev_team.py first.
+    pause
+    exit /b 1
+)
+
 REM Check if Ollama is running
 tasklist /FI "IMAGENAME eq ollama.exe" 2>NUL | find /I /N "ollama.exe">NUL
 if "%ERRORLEVEL%"=="1" (
@@ -61,6 +72,14 @@ if "%choice%"=="1" (
     python src\ai_dev_team\main.py
 ) else (
     echo 👋 Goodbye!
+)
+
+REM Deactivate virtual environment
+if defined VENV_ACTIVATED (
+    call deactivate
+    echo ✅ Virtual environment deactivated
+) else (
+    echo ⚠️  Virtual environment was not activated, skipping deactivation
 )
 
 pause
