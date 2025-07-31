@@ -1867,7 +1867,11 @@ case $choice in
 esac
 
 # Deactivate virtual environment
-deactivate
+if command -v deactivate >/dev/null 2>&1; then
+    deactivate
+else
+    echo "No virtual environment to deactivate."
+fi
 '''
         
         with open(self.project_dir / "start.sh", "w") as f:
