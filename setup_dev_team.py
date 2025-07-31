@@ -1798,6 +1798,16 @@ if [ ! -f "src/ai_dev_team/main.py" ]; then
     exit 1
 fi
 
+# Activate virtual environment
+if [ -d "venv" ]; then
+    echo "🐍 Activating virtual environment..."
+    source venv/bin/activate
+    echo "✅ Virtual environment activated"
+else
+    echo "⚠️  Virtual environment not found. Please run setup_dev_team.py first."
+    exit 1
+fi
+
 # Check if Ollama is running
 if ! pgrep -x "ollama" > /dev/null; then
     echo "🚀 Starting Ollama..."
@@ -1855,6 +1865,9 @@ case $choice in
         echo "👋 Goodbye!"
         ;;
 esac
+
+# Deactivate virtual environment
+deactivate
 '''
         
         with open(self.project_dir / "start.sh", "w") as f:
@@ -1871,6 +1884,17 @@ echo ======================================
 REM Check if we're in the right directory
 if not exist "src\\ai_dev_team\\main.py" (
     echo ❌ Please run this script from the ai_dev_team directory
+    pause
+    exit /b 1
+)
+
+REM Activate virtual environment
+if exist "venv\\Scripts\\activate.bat" (
+    echo 🐍 Activating virtual environment...
+    call venv\\Scripts\\activate.bat
+    echo ✅ Virtual environment activated
+) else (
+    echo ⚠️  Virtual environment not found. Please run setup_dev_team.py first.
     pause
     exit /b 1
 )
@@ -1929,6 +1953,9 @@ if "%choice%"=="1" (
     echo 👋 Goodbye!
 )
 
+REM Deactivate virtual environment
+call deactivate
+
 pause
 '''
         
@@ -1937,24 +1964,68 @@ pause
         
         print("✅ Startup scripts created")
     
+    def create_virtual_environment(self):
+        """Create and setup virtual environment"""
+        print("🐍 Creating virtual environment...")
+        
+        venv_path = self.project_dir / "venv"
+        
+        try:
+            # Create virtual environment
+            subprocess.run([
+                sys.executable, "-m", "venv", str(venv_path)
+            ], check=True)
+            
+            print("✅ Virtual environment created")
+            
+            # Determine the correct python executable path
+            if platform.system().lower() == "windows":
+                python_exe = venv_path / "Scripts" / "python.exe"
+                pip_exe = venv_path / "Scripts" / "pip.exe"
+            else:
+                python_exe = venv_path / "bin" / "python"
+                pip_exe = venv_path / "bin" / "pip"
+            
+            return python_exe, pip_exe
+            
+        except subprocess.CalledProcessError as e:
+            print(f"❌ Failed to create virtual environment: {e}")
+            print("Falling back to system Python (not recommended)")
+            return sys.executable, "pip"
+    
     def install_dependencies(self):
-        """Install project dependencies"""
-        print("📦 Installing dependencies...")
+        """Install project dependencies in virtual environment"""
+        print("📦 Installing dependencies in virtual environment...")
         
         try:
             # Change to project directory
             os.chdir(self.project_dir)
             
-            # Install dependencies using pip
+            # Create virtual environment
+            python_exe, pip_exe = self.create_virtual_environment()
+            
+            # Upgrade pip in virtual environment
             subprocess.run([
-                sys.executable, "-m", "pip", "install", "-e", "."
+                str(python_exe), "-m", "pip", "install", "--upgrade", "pip"
             ], check=True)
             
-            print("✅ Dependencies installed successfully")
+            # Install dependencies using pip in virtual environment
+            subprocess.run([
+                str(python_exe), "-m", "pip", "install", "-e", "."
+            ], check=True)
+            
+            print("✅ Dependencies installed successfully in virtual environment")
+            
+            # Update activation instructions
+            self.python_exe = python_exe
+            self.pip_exe = pip_exe
             
         except subprocess.CalledProcessError as e:
             print(f"⚠️  Warning: Failed to install dependencies: {e}")
-            print("You can install them manually later with: pip install -e .")
+            print("You can install them manually later with:")
+            print("  source venv/bin/activate  # Linux/Mac")
+            print("  venv\\Scripts\\activate     # Windows")
+            print("  pip install -e .")
     
     def run_setup(self):
         """Run the complete setup process"""
@@ -1982,9 +2053,12 @@ pause
 ║  Your AI Development Team is ready to use!                                  ║
 ║                                                                              ║
 ║  📁 Project Location: {self.project_dir}                    ║
+║  🐍 Virtual Environment: {self.project_name}/venv                           ║
 ║                                                                              ║
 ║  🚀 Quick Start:                                                             ║
 ║     cd {self.project_name}                                                   ║
+║     source venv/bin/activate  (Linux/Mac)                                   ║
+║     venv\\Scripts\\activate      (Windows)                                     ║
 ║     ./start.sh  (Linux/Mac) or start.bat (Windows)                          ║
 ║                                                                              ║
 ║  📖 Or read the README.md for detailed instructions                         ║
@@ -1996,6 +2070,7 @@ pause
 ║     • UI/UX Designer                                                         ║
 ║                                                                              ║
 ║  🛠️  Pre-configured with local AI models (no API costs!)                   ║
+║  🔒 Isolated virtual environment for clean dependency management             ║
 ║                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
             """

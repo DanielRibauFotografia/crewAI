@@ -59,20 +59,24 @@ crewAI/
 ### Método 1: Script de Inicialização (Recomendado)
 ```bash
 cd ai_dev_team
-./start.sh  # Linux/Mac
+./start.sh  # Linux/Mac (ativa automaticamente o venv)
 # ou
-start.bat   # Windows
+start.bat   # Windows (ativa automaticamente o venv)
 ```
 
 ### Método 2: Comando Direto
 ```bash
 cd ai_dev_team
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
 python src/ai_dev_team/main.py "Descrição do seu projeto"
 ```
 
 ### Método 3: Workflow Personalizado
 ```bash
 cd ai_dev_team
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
 python src/ai_dev_team/main.py --custom
 ```
 
@@ -157,6 +161,7 @@ Todos os resultados são guardados em `output/`:
 - Privacidade total dos dados
 - Funciona offline
 - Controlo total sobre os modelos
+- Ambiente virtual isolado para dependências
 
 ### ✅ Equipa Completa
 - 10 especialistas diferentes
@@ -175,6 +180,42 @@ Todos os resultados são guardados em `output/`:
 - Ferramentas personalizáveis
 - Workflows modulares
 - Integração com ferramentas externas
+
+## 🔧 Gestão do Ambiente Virtual
+
+### Por que Ambiente Virtual?
+- **Isolamento**: Dependências não conflitam com pacotes do sistema
+- **Reprodutibilidade**: Ambiente consistente entre diferentes máquinas
+- **Segurança**: Previne modificações no sistema global
+- **Gestão Limpa**: Fácil de remover ou recriar
+
+### Comandos Úteis
+```bash
+# Ativar ambiente virtual
+cd ai_dev_team
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+
+# Desativar ambiente virtual
+deactivate
+
+# Recriar ambiente virtual (se necessário)
+rm -rf venv
+python -m venv venv
+source venv/bin/activate
+pip install -e .
+
+# Verificar pacotes instalados
+pip list
+
+# Atualizar dependências
+pip install --upgrade -r requirements.txt
+```
+
+### Resolução de Problemas
+- **Erro de permissões**: Certifique-se de ter permissões de escrita no diretório
+- **Python não encontrado**: Verifique se Python 3.10+ está instalado
+- **Ambiente corrompido**: Delete `venv/` e recrie com `python -m venv venv`
 
 ## 🔄 Próximos Passos
 
